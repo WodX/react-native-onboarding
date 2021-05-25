@@ -5,67 +5,35 @@ import {
   View,
   StyleSheet,
   Image,
-  Modal,
   Pressable,
-  TextInput,
 } from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
+import ModalForm from '../components/ModalForm';
 import {updateUser} from '../slices/userSlice';
 
 function ProfileScreen({navigation}) {
-  const userData = useSelector(data => data.user);
+  const user = useSelector(data => data.user);
   const dispatch = useDispatch();
   const [modalVisible, setModalVisible] = useState(false);
-  const [user, setUser] = useState(userData);
 
-  const handleSave = () => {
+  const handleSave = newData => {
     setModalVisible(!modalVisible);
-    dispatch(updateUser(user));
+    dispatch(updateUser(newData));
   };
 
   return (
     <SafeAreaView style={styles.container}>
-
-      <Modal
+      <ModalForm
         animationType="slide"
         transparent={true}
         visible={modalVisible}
         onRequestClose={() => {
           setModalVisible(!modalVisible);
-        }}>
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <View>
-              <TextInput
-                value={user.name}
-                style={styles.input}
-                onChangeText={text => setUser({...user, name: text})}
-              />
-              <TextInput
-                value={user.email}
-                style={styles.input}
-                onChangeText={text => setUser({...user, email: text})}
-              />
-              <TextInput
-                value={user.description}
-                style={styles.input}
-                onChangeText={text => setUser({...user, description: text})}
-                multiline
-              />
-            </View>
-            <Pressable
-              style={[styles.button, styles.buttonEdit]}
-              onPress={handleSave}>
-              <Text style={styles.textStyle}>Save</Text>
-            </Pressable>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}>
-              <Text style={styles.textStyle}>Close</Text>
-            </Pressable>
-          </View>
-        </View>
-      </Modal>
+        }}
+        handleClose={() => setModalVisible(!modalVisible)}
+        handleSave={handleSave}
+        data={user}
+      />
 
       <View style={styles.header}>
         <View style={styles.imageContainer}>
@@ -131,35 +99,12 @@ const styles = StyleSheet.create({
     marginVertical: 35,
     color: '#343a40',
   },
-  centeredView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 22,
-  },
-  modalView: {
-    backgroundColor: 'white',
-    borderRadius: 10,
-    padding: 35,
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
   button: {
     borderRadius: 10,
     padding: 10,
     elevation: 2,
     minWidth: 100,
     marginVertical: 5,
-  },
-  buttonClose: {
-    backgroundColor: '#f08080',
   },
   buttonEdit: {
     backgroundColor: '#277da1',
@@ -168,17 +113,6 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
     textAlign: 'center',
-  },
-  modalText: {
-    marginBottom: 15,
-    textAlign: 'center',
-  },
-  input: {
-    padding: 10,
-    backgroundColor: '#ced4da',
-    borderRadius: 10,
-    width: 300,
-    marginVertical: 10,
   },
 });
 
