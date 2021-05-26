@@ -1,8 +1,9 @@
 import * as React from 'react';
-import {SafeAreaView, StyleSheet} from 'react-native';
+import {SafeAreaView} from 'react-native';
 import {useSelector} from 'react-redux';
-import Gallery from '../components/Gallery';
-import NoImage from '../components/NoImage';
+import Gallery from '../../components/Gallery';
+import NoImage from '../../components/NoImage';
+import styles from './GalleryScreen.styles';
 
 function GalleryScreen({navigation}) {
   const images = useSelector(data => data.image.items);
@@ -21,11 +22,5 @@ function GalleryScreen({navigation}) {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  safeView: {
-    flex: 1,
-  },
-});
 
 export default GalleryScreen;

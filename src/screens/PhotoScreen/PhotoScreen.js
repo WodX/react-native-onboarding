@@ -1,9 +1,7 @@
 import {useFocusEffect} from '@react-navigation/core';
-import React from 'react';
 import {launchCamera} from 'react-native-image-picker';
-import GalleryScreen from './GalleryScreen';
 import {useDispatch} from 'react-redux';
-import {addImage} from '../slices/imageSlice';
+import {addImage} from '../../store/slices/imageSlice';
 
 function PhotoScreen({navigation}) {
   const dispatch = useDispatch();

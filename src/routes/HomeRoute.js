@@ -1,9 +1,7 @@
 import * as React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import GalleryScreen from '../sreens/GalleryScreen';
-import ProfileScreen from '../sreens/ProfileScreen';
 import {Image, StyleSheet, View} from 'react-native';
-import PhotoScreen from '../sreens/PhotoScreen';
+import {PhotoScreen, ProfileScreen} from '../screens';
 import GalleryRoute from './GalleryRoute';
 
 const Tab = createBottomTabNavigator();

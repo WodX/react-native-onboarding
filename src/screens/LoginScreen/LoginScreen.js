@@ -1,6 +1,7 @@
 import * as React from 'react';
-import {Text, Pressable, SafeAreaView, StyleSheet} from 'react-native';
-import Button from '../styles/buttons';
+import {Text, Pressable, SafeAreaView} from 'react-native';
+import Button from '../../styles/buttons';
+import styles from './LoginScreen.styles';
 
 function LoginScreen({navigation}) {
   return (
@@ -15,13 +16,5 @@ function LoginScreen({navigation}) {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
 
 export default LoginScreen;

@@ -1,9 +1,10 @@
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {removeImage} from '../slices/imageSlice';
-import {updateUser, updateImage} from '../slices/userSlice';
-import {View, Text, Image, StyleSheet, Pressable} from 'react-native';
-import Button from '../styles/buttons';
+import {removeImage} from '../../store/slices/imageSlice';
+import {updateUser, updateImage} from '../../store/slices/userSlice';
+import {View, Text, Image, Pressable} from 'react-native';
+import Button from '../../styles/buttons';
+import styles from './PhothoDetailsScreen.styles';
 
 function PhotoDetailsScreen({navigation, route: {params}}) {
   const user = useSelector(data => data.user);
@@ -56,25 +57,5 @@ function PhotoDetailsScreen({navigation, route: {params}}) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 15,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  text: {
-    alignSelf: 'flex-start',
-  },
-  bold: {fontWeight: 'bold'},
-  image: {
-    width: 300,
-    height: 300,
-    marginVertical: 20,
-  },
-  buttonsContainer: {
-    flexDirection: 'row',
-  },
-});
 
 export default PhotoDetailsScreen;

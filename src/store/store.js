@@ -13,8 +13,8 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
-import userSlice from '../slices/userSlice';
-import imageSlice from '../slices/imageSlice';
+import userSlice from './slices/userSlice';
+import imageSlice from './slices/imageSlice';
 
 const persistConfig = {
   key: 'root',
