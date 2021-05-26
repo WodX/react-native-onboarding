@@ -16,9 +16,12 @@ export const userSlice = createSlice({
       state.description = action.payload.description || state.description;
       state.email = action.payload.email || state.email;
     },
+    updateImage: (state, action) => {
+      state.image = action.payload.image;
+    },
   },
 });
 
-export const {updateUser} = userSlice.actions;
+export const {updateUser, updateImage} = userSlice.actions;
 
 export default userSlice.reducer;

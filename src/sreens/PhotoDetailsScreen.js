@@ -1,13 +1,17 @@
 import React from 'react';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {removeImage} from '../slices/imageSlice';
-import {updateUser} from '../slices/userSlice';
+import {updateUser, updateImage} from '../slices/userSlice';
 import {View, Text, Image, StyleSheet, Pressable} from 'react-native';
 
 function PhotoDetailsScreen({navigation, route: {params}}) {
+  const user = useSelector(data => data.user);
   const dispatch = useDispatch();
 
   const handleDelete = () => {
+    if (params.uri === user.image) {
+      dispatch(updateImage({image: ''}));
+    }
     dispatch(removeImage(params.uri));
     navigation.navigate('Gallery');
   };
@@ -40,7 +44,7 @@ function PhotoDetailsScreen({navigation, route: {params}}) {
         <Text style={styles.bold}>Height: </Text>
         {params.height}
       </Text>
-      <View style={{flexDirection: 'row'}}>
+      <View style={styles.buttonsContainer}>
         <Pressable
           onPress={handleDelete}
           style={[styles.button, styles.buttonDelete]}>
@@ -68,6 +72,9 @@ const styles = StyleSheet.create({
     width: 300,
     height: 300,
     marginVertical: 20,
+  },
+  buttonsContainer: {
+    flexDirection: 'row',
   },
   button: {
     borderRadius: 10,
