@@ -37,7 +37,12 @@ function ProfileScreen({navigation}) {
 
       <View style={styles.header}>
         <View style={styles.imageContainer}>
-          <Image source={require('../assets/user.png')} style={styles.image} />
+          <Image
+            source={
+              user.image ? {uri: user.image} : require('../assets/user.png')
+            }
+            style={styles.image}
+          />
         </View>
       </View>
       <View style={styles.content}>

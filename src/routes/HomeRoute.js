@@ -2,7 +2,9 @@ import * as React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import GalleryScreen from '../sreens/GalleryScreen';
 import ProfileScreen from '../sreens/ProfileScreen';
-import {Image, StyleSheet} from 'react-native';
+import {Image, StyleSheet, View} from 'react-native';
+import PhotoScreen from '../sreens/PhotoScreen';
+import GalleryRoute from './GalleryRoute';
 
 const Tab = createBottomTabNavigator();
 
@@ -16,13 +18,27 @@ function HomeRoute() {
       }}>
       <Tab.Screen
         name="Gallery"
-        component={GalleryScreen}
+        component={GalleryRoute}
         options={{
           tabBarIcon: () => (
             <Image
               source={require('../assets/gallery.png')}
               style={styles.image}
             />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Photo"
+        component={PhotoScreen}
+        options={{
+          tabBarIcon: () => (
+            <View style={styles.photoContainer}>
+              <Image
+                source={require('../assets/photo.png')}
+                style={styles.photo}
+              />
+            </View>
           ),
         }}
       />
@@ -44,6 +60,23 @@ function HomeRoute() {
 
 const styles = new StyleSheet.create({
   image: {width: 20, height: 20},
+  photo: {
+    width: '100%',
+    height: '100%',
+    maxWidth: 35,
+    maxHeight: 35,
+  },
+  photoContainer: {
+    backgroundColor: 'white',
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    borderColor: 'white',
+    borderWidth: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 15,
+  },
 });
 
 export default HomeRoute;
