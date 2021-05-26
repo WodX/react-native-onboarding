@@ -3,7 +3,7 @@ const normal = {
   padding: 10,
   elevation: 2,
   minWidth: 100,
-  margin: 15,
+  margin: 10,
   backgroundColor: '#277da1',
 };
 

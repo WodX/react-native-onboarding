@@ -13,7 +13,7 @@ function GalleryScreen({navigation}) {
         <Gallery
           data={images}
           onPressItem={image => {
-            navigation.navigate('PhotoDetails', image);
+            navigation.navigate('PhotoDetails', image.uri);
           }}
         />
       ) : (

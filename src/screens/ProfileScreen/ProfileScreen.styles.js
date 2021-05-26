@@ -28,6 +28,10 @@ export default StyleSheet.create({
     height: '100%',
     borderRadius: 50,
   },
+  cover: {
+    width: '100%',
+    height: '100%',
+  },
   content: {
     flex: 2,
     alignItems: 'center',
