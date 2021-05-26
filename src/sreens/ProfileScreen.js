@@ -10,6 +10,7 @@ import {
 import {useSelector, useDispatch} from 'react-redux';
 import ModalForm from '../components/ModalForm';
 import {updateUser} from '../slices/userSlice';
+import Button from '../styles/buttons';
 
 function ProfileScreen({navigation}) {
   const user = useSelector(data => data.user);
@@ -50,9 +51,9 @@ function ProfileScreen({navigation}) {
         <Text style={styles.email}>{user.email}</Text>
         <Text style={styles.description}>{user.description}</Text>
         <Pressable
-          style={[styles.button, styles.buttonEdit]}
+          style={Button.normal}
           onPress={() => setModalVisible(!modalVisible)}>
-          <Text style={styles.textStyle}>Edit Profile</Text>
+          <Text style={Button.text}>Edit Profile</Text>
         </Pressable>
       </View>
     </SafeAreaView>
@@ -103,21 +104,6 @@ const styles = StyleSheet.create({
   description: {
     marginVertical: 35,
     color: '#343a40',
-  },
-  button: {
-    borderRadius: 10,
-    padding: 10,
-    elevation: 2,
-    minWidth: 100,
-    marginVertical: 5,
-  },
-  buttonEdit: {
-    backgroundColor: '#277da1',
-  },
-  textStyle: {
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
   },
 });
 

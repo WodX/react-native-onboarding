@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {removeImage} from '../slices/imageSlice';
 import {updateUser, updateImage} from '../slices/userSlice';
 import {View, Text, Image, StyleSheet, Pressable} from 'react-native';
+import Button from '../styles/buttons';
 
 function PhotoDetailsScreen({navigation, route: {params}}) {
   const user = useSelector(data => data.user);
@@ -45,13 +46,11 @@ function PhotoDetailsScreen({navigation, route: {params}}) {
         {params.height}
       </Text>
       <View style={styles.buttonsContainer}>
-        <Pressable
-          onPress={handleDelete}
-          style={[styles.button, styles.buttonDelete]}>
-          <Text style={styles.textButton}>Delete</Text>
+        <Pressable onPress={handleDelete} style={Button.close}>
+          <Text style={Button.text}>Delete</Text>
         </Pressable>
-        <Pressable onPress={handleAdd} style={styles.button}>
-          <Text style={styles.textButton}>Add Profile photo</Text>
+        <Pressable onPress={handleAdd} style={Button.normal}>
+          <Text style={Button.text}>Add Profile photo</Text>
         </Pressable>
       </View>
     </View>
@@ -75,22 +74,6 @@ const styles = StyleSheet.create({
   },
   buttonsContainer: {
     flexDirection: 'row',
-  },
-  button: {
-    borderRadius: 10,
-    padding: 10,
-    elevation: 2,
-    minWidth: 100,
-    margin: 15,
-    backgroundColor: '#277da1',
-  },
-  buttonDelete: {
-    backgroundColor: '#f08080',
-  },
-  textButton: {
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
   },
 });
 

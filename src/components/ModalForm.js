@@ -7,6 +7,7 @@ import {
   Pressable,
   TextInput,
 } from 'react-native';
+import Button from '../styles/buttons';
 
 function ModalForm({data, handleClose, handleSave, ...props}) {
   const [user, setUser] = useState(data);
@@ -33,15 +34,11 @@ function ModalForm({data, handleClose, handleSave, ...props}) {
               multiline
             />
           </View>
-          <Pressable
-            style={[styles.button, styles.buttonSave]}
-            onPress={() => handleSave(user)}>
-            <Text style={styles.textStyle}>Save</Text>
+          <Pressable style={Button.normal} onPress={() => handleSave(user)}>
+            <Text style={Button.text}>Save</Text>
           </Pressable>
-          <Pressable
-            style={[styles.button, styles.buttonClose]}
-            onPress={handleClose}>
-            <Text style={styles.textStyle}>Close</Text>
+          <Pressable style={Button.close} onPress={handleClose}>
+            <Text style={Button.text}>Close</Text>
           </Pressable>
         </View>
       </View>
@@ -69,24 +66,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
-  },
-  button: {
-    borderRadius: 10,
-    padding: 10,
-    elevation: 2,
-    minWidth: 100,
-    marginVertical: 5,
-  },
-  buttonClose: {
-    backgroundColor: '#f08080',
-  },
-  buttonSave: {
-    backgroundColor: '#277da1',
-  },
-  textStyle: {
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
   },
   modalText: {
     marginBottom: 15,

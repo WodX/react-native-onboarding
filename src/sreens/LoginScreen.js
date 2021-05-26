@@ -1,15 +1,16 @@
 import * as React from 'react';
 import {Text, Pressable, SafeAreaView, StyleSheet} from 'react-native';
+import Button from '../styles/buttons';
 
 function LoginScreen({navigation}) {
   return (
     <SafeAreaView style={styles.container}>
       <Pressable
-        style={styles.button}
+        style={Button.normal}
         onPress={() => {
           navigation.navigate('Home');
         }}>
-        <Text style={styles.textStyle}>Login</Text>
+        <Text style={Button.text}>Login</Text>
       </Pressable>
     </SafeAreaView>
   );
@@ -20,19 +21,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  button: {
-    borderRadius: 10,
-    padding: 10,
-    elevation: 2,
-    minWidth: 100,
-    marginVertical: 5,
-    backgroundColor: '#277da1',
-  },
-  textStyle: {
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
   },
 });
 
