@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {
   SafeAreaView,
   Text,
@@ -24,9 +24,9 @@ function ProfileScreen() {
   const dispatch = useDispatch();
   const [modalVisible, setModalVisible] = useState(false);
 
-  const handleSave = newData => {
+  const handleSave = ({name, email, description}) => {
     setModalVisible(!modalVisible);
-    dispatch(updateUser(newData));
+    dispatch(updateUser({id: current_user.id, name, email, description}));
   };
 
   const handleImage = type => {

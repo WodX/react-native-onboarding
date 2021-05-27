@@ -10,7 +10,7 @@ const useRefresh = () => {
   );
 
   useEffect(() => {
-    dispatch(refreshUser(user));
+    user && dispatch(refreshUser(user));
   }, [user, dispatch]);
 
   return;

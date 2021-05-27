@@ -10,7 +10,9 @@ import {
 import Button from '../styles/buttons';
 
 function ModalForm({data, handleClose, handleSave, ...props}) {
-  const [user, setUser] = useState(data);
+  const [name, setName] = useState(data.name);
+  const [email, setEmail] = useState(data.email);
+  const [description, setDescription] = useState(data.description);
 
   return (
     <Modal {...props}>
@@ -18,23 +20,31 @@ function ModalForm({data, handleClose, handleSave, ...props}) {
         <View style={styles.modalView}>
           <View>
             <TextInput
-              value={user.name}
+              value={name}
+              placeholder="Name"
+              placeholderTextColor="#fff"
               style={styles.input}
-              onChangeText={text => setUser({...user, name: text})}
+              onChangeText={text => setName(text)}
             />
             <TextInput
-              value={user.email}
+              value={email}
+              placeholder="Email"
+              placeholderTextColor="#fff"
               style={styles.input}
-              onChangeText={text => setUser({...user, email: text})}
+              onChangeText={text => setEmail(text)}
             />
             <TextInput
-              value={user.description}
+              value={description}
+              placeholder="Description"
+              placeholderTextColor="#fff"
               style={styles.input}
-              onChangeText={text => setUser({...user, description: text})}
+              onChangeText={text => setDescription(text)}
               multiline
             />
           </View>
-          <Pressable style={Button.normal} onPress={() => handleSave(user)}>
+          <Pressable
+            style={Button.normal}
+            onPress={() => handleSave({name, email, description})}>
             <Text style={Button.text}>Save</Text>
           </Pressable>
           <Pressable style={Button.close} onPress={handleClose}>
