@@ -8,7 +8,6 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
-import ModalForm from '../../components/ModalForm';
 import {logoutUser} from '../../store/slices/userSlice';
 import useRefresh from '../../hooks/useRefresh';
 import {updateUser} from '../../store/slices/usersSlice';
@@ -16,7 +15,7 @@ import Button from '../../styles/buttons';
 import styles from './ProfileScreen.styles';
 import {launchCamera} from 'react-native-image-picker';
 import {addImage} from '../../store/slices/imageSlice';
-import {ProfilePhoto} from '../../components';
+import {ProfilePhoto, ModalForm} from '../../components';
 
 function ProfileScreen() {
   useRefresh();

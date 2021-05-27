@@ -1,8 +1,7 @@
 import * as React from 'react';
 import {SafeAreaView} from 'react-native';
 import {useSelector} from 'react-redux';
-import Gallery from '../../components/Gallery';
-import NoImage from '../../components/NoImage';
+import {Gallery, NoImage} from '../../components';
 import styles from './GalleryScreen.styles';
 
 function GalleryScreen({navigation}) {

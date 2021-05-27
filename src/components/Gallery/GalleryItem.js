@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {StyleSheet, Image, TouchableOpacity} from 'react-native';
 
-function Gallery({image, onPress}) {
+function GalleryItem({image, onPress}) {
   return (
     <TouchableOpacity
       style={styles.container}
@@ -21,7 +21,8 @@ const styles = StyleSheet.create({
   image: {
     width: '100%',
     height: '100%',
+    borderRadius: 5,
   },
 });
 
-export default Gallery;
+export default GalleryItem;
