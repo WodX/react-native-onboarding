@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   SafeAreaView,
   Text,
@@ -9,7 +9,9 @@ import {
 } from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import ModalForm from '../../components/ModalForm';
-import {updateUser, logoutUser} from '../../store/slices/userSlice';
+import {logoutUser} from '../../store/slices/userSlice';
+import useRefresh from '../../hooks/useRefresh';
+import {updateUser} from '../../store/slices/usersSlice';
 import Button from '../../styles/buttons';
 import styles from './ProfileScreen.styles';
 import {launchCamera} from 'react-native-image-picker';
@@ -17,7 +19,8 @@ import {addImage} from '../../store/slices/imageSlice';
 import {ProfilePhoto} from '../../components';
 
 function ProfileScreen() {
-  const user = useSelector(data => data.user);
+  useRefresh();
+  const current_user = useSelector(data => data.user);
   const dispatch = useDispatch();
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -32,7 +35,7 @@ function ProfileScreen() {
         return;
       }
       dispatch(addImage(response));
-      dispatch(updateUser({[type]: response.uri}));
+      dispatch(updateUser({id: current_user.id, [type]: response.uri}));
     });
   };
 
@@ -59,7 +62,7 @@ function ProfileScreen() {
         }}
         handleClose={() => setModalVisible(!modalVisible)}
         handleSave={handleSave}
-        data={user}
+        data={current_user}
       />
 
       <View style={styles.header}>
@@ -68,23 +71,23 @@ function ProfileScreen() {
           style={styles.coverContainer}>
           <Image
             source={
-              user.cover
-                ? {uri: user.cover}
+              current_user.cover
+                ? {uri: current_user.cover}
                 : backgrounds[Math.floor(Math.random() * backgrounds.length)]
             }
             style={styles.cover}
           />
         </TouchableOpacity>
         <ProfilePhoto
-          image={user.image}
+          image={current_user.image}
           style={styles.imageContainer}
           onPress={() => handleImage('image')}
         />
       </View>
       <View style={styles.content}>
-        <Text style={styles.name}>{user.name}</Text>
-        <Text style={styles.email}>{user.email}</Text>
-        <Text style={styles.description}>{user.description}</Text>
+        <Text style={styles.name}>{current_user.name}</Text>
+        <Text style={styles.email}>{current_user.email}</Text>
+        <Text style={styles.description}>{current_user.description}</Text>
         <Pressable
           style={Button.normal}
           onPress={() => setModalVisible(!modalVisible)}>

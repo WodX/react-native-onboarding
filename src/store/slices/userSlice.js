@@ -16,23 +16,18 @@ export const userSlice = createSlice({
     logoutUser: state => {
       state.id = '';
     },
-    updateUser: (state, action) => {
-      state.image = action.payload.image || state.image;
-      state.cover = action.payload.cover || state.cover;
-      state.name = action.payload.name || state.name;
-      state.description = action.payload.description || state.description;
-      state.email = action.payload.email || state.email;
-    },
-    updateImage: (state, action) => {
+    refreshUser: (state, action) => {
       state.image = action.payload.image;
-    },
-    updateCover: (state, action) => {
       state.cover = action.payload.cover;
+      state.name = action.payload.name;
+      state.description = action.payload.description;
+      state.email = action.payload.email;
+      state.password = action.payload.password;
+      state.id = action.payload.id;
     },
   },
 });
 
-export const {updateUser, updateImage, updateCover, loginUser, logoutUser} =
-  userSlice.actions;
+export const {loginUser, logoutUser, refreshUser} = userSlice.actions;
 
 export default userSlice.reducer;

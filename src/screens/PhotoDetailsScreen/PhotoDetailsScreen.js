@@ -1,16 +1,14 @@
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {removeImage} from '../../store/slices/imageSlice';
-import {
-  updateUser,
-  updateImage,
-  updateCover,
-} from '../../store/slices/userSlice';
+import {updateUser} from '../../store/slices/usersSlice';
 import {View, Text, Image, Pressable} from 'react-native';
 import Button from '../../styles/buttons';
 import styles from './PhotoDetailsScreen.styles';
+import useRefresh from '../../hooks/useRefresh';
 
 function PhotoDetailsScreen({navigation, route: {params}}) {
+  useRefresh();
   const user = useSelector(data => data.user);
   const [image_data] = useSelector(data =>
     data.image.items.filter(image_inside => image_inside.uri === params),
@@ -21,21 +19,23 @@ function PhotoDetailsScreen({navigation, route: {params}}) {
   const handleDelete = () => {
     navigation.navigate('Gallery');
     if (image.uri === user.image) {
-      dispatch(updateImage({image: ''}));
+      dispatch(updateUser({id: user.id, image: ''}));
     }
     if (image.uri === user.cover) {
-      dispatch(updateCover({cover: ''}));
+      dispatch(updateUser({id: user.id, cover: ''}));
     }
     dispatch(removeImage(image.uri));
   };
 
   const handleAddProfile = () => {
-    dispatch(updateUser({image: image.uri}));
+    dispatch(updateUser({id: user.id, image: image.uri}));
+    navigation.navigate('Gallery');
     navigation.navigate('Profile');
   };
 
   const handleAddCover = () => {
-    dispatch(updateUser({cover: image.uri}));
+    dispatch(updateUser({id: user.id, cover: image.uri}));
+    navigation.navigate('Gallery');
     navigation.navigate('Profile');
   };
 
