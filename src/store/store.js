@@ -15,6 +15,7 @@ import {
 } from 'redux-persist';
 import userSlice from './slices/userSlice';
 import imageSlice from './slices/imageSlice';
+import usersSlice from './slices/usersSlice';
 
 const persistConfig = {
   key: 'root',
@@ -23,6 +24,7 @@ const persistConfig = {
 
 const reducers = combineReducers({
   user: userSlice,
+  users: usersSlice,
   image: imageSlice,
 });
 

@@ -14,19 +14,9 @@ export default StyleSheet.create({
   imageContainer: {
     position: 'absolute',
     bottom: -50,
-    width: 100,
-    height: 100,
-    borderRadius: 100,
-    backgroundColor: '#ced4da',
-    borderColor: 'white',
-    borderWidth: 5,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
-  image: {
+  coverContainer: {
     width: '100%',
-    height: '100%',
-    borderRadius: 50,
   },
   cover: {
     width: '100%',
@@ -48,9 +38,5 @@ export default StyleSheet.create({
   description: {
     marginVertical: 35,
     color: '#343a40',
-  },
-  imageLink: {
-    width: 90,
-    height: 90,
   },
 });

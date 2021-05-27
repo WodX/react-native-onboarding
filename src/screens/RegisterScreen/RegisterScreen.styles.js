@@ -20,18 +20,9 @@ export default StyleSheet.create({
     borderWidth: 2,
     borderColor: '#f08080',
   },
-  imageContainer: {
-    width: 200,
-    height: 200,
-    alignSelf: 'center',
-    marginBottom: 50,
-  },
   image: {
-    width: '100%',
-    height: '100%',
-  },
-  errorMessage: {
-    color: '#f08080',
+    alignSelf: 'center',
+    margin: 20,
   },
   link: {color: '#277da1'},
   textContainer: {

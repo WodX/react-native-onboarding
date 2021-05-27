@@ -2,15 +2,20 @@ import {createSlice} from '@reduxjs/toolkit';
 
 export const userSlice = createSlice({
   name: 'user',
-  initialState: {
-    image: '',
-    cover: '',
-    name: 'André Nunes',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras malesuada ipsum ac nisi vestibulum mattis. Nullam vel ex est. Integer varius, mauris sed bibendum rutrum, justo odio tempor libero, eu aliquet lectus massa vel velit. Sed tortor metus, mollis ac porttitor a, efficitur eget elit. Phasellus suscipit fermentum nisl, efficitur pretium magna suscipit eu. Sed rhoncus urna neque, et consectetur sem congue ut.',
-    email: 'myemail@example.com',
-  },
+  initialState: {},
   reducers: {
+    loginUser: (state, action) => {
+      state.image = action.payload.image;
+      state.cover = action.payload.cover;
+      state.name = action.payload.name;
+      state.description = action.payload.description;
+      state.email = action.payload.email;
+      state.password = action.payload.password;
+      state.id = action.payload.id;
+    },
+    logoutUser: state => {
+      state.id = '';
+    },
     updateUser: (state, action) => {
       state.image = action.payload.image || state.image;
       state.cover = action.payload.cover || state.cover;
@@ -27,6 +32,7 @@ export const userSlice = createSlice({
   },
 });
 
-export const {updateUser, updateImage, updateCover} = userSlice.actions;
+export const {updateUser, updateImage, updateCover, loginUser, logoutUser} =
+  userSlice.actions;
 
 export default userSlice.reducer;

@@ -3,6 +3,7 @@ import LoginScreen from './LoginScreen/LoginScreen';
 import PhotoDetailsScreen from './PhotoDetailsScreen/PhotoDetailsScreen';
 import PhotoScreen from './PhotoScreen/PhotoScreen';
 import ProfileScreen from './ProfileScreen/ProfileScreen';
+import RegisterScreen from './RegisterScreen/RegisterScreen';
 
 export {
   GalleryScreen,
@@ -10,4 +11,5 @@ export {
   PhotoDetailsScreen,
   PhotoScreen,
   ProfileScreen,
+  RegisterScreen,
 };
