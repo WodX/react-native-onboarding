@@ -11,20 +11,26 @@ import {
   Pressable,
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {addImage} from '../../store/slices/imageSlice';
+import {updateImage, removeImage} from '../../store/slices/imageSlice';
 import styles from './PhotoConfirm.styles';
 import Geolocation from '@react-native-community/geolocation';
 import {Picker} from '@react-native-picker/picker';
 import ButtonStyle from '../../styles/buttons';
 
-function PhotoScreen({navigation, route: {params: image}}) {
+function PhotoScreen({navigation, route: {params}}) {
   const dispatch = useDispatch();
   const user_id = useSelector(data => data.user.id);
-  const [album, setAlbum] = useState('');
-  const [description, setDescription] = useState('');
-  const [labels, setLabels] = useState([]);
-  const [location, setLocation] = useState({status: '', info: {}});
-  const [isPrivate, setIsPrivate] = useState(false);
+  const [image = {}] = useSelector(data =>
+    data.image.items.filter(img => img.uri === params.id),
+  );
+
+  const [album, setAlbum] = useState(image.album || '');
+  const [description, setDescription] = useState(image.description || '');
+  const [labels, setLabels] = useState(image.labels || []);
+  const [location, setLocation] = useState(
+    image.location || {status: '', info: {}},
+  );
+  const [isPrivate, setIsPrivate] = useState(image.isPrivate ? true : false);
   const descriptionInput = useRef(null);
 
   const handleLocation = () => {
@@ -54,13 +60,14 @@ function PhotoScreen({navigation, route: {params: image}}) {
   };
 
   const handleCancel = () => {
+    !image.user_id && dispatch(removeImage(image.uri));
     navigation.goBack();
     navigation.navigate('Gallery');
   };
 
   const handleUpload = () => {
     dispatch(
-      addImage({
+      updateImage({
         ...image,
         location,
         labels,
@@ -88,6 +95,7 @@ function PhotoScreen({navigation, route: {params: image}}) {
           ref={descriptionInput}
           placeholder="Description..."
           placeholderTextColor="#101010"
+          value={description}
           multiline
           style={styles.descriptionInput}
           onChangeText={setDescription}
@@ -111,6 +119,7 @@ function PhotoScreen({navigation, route: {params: image}}) {
               placeholder="ex: sun, greatday, party..."
               placeholderTextColor="#fff"
               returnKeyType="done"
+              value={labels.join()}
               style={styles.labelsInput}
               onChangeText={handleLabels}
             />

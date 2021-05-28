@@ -8,11 +8,12 @@ export default StyleSheet.create({
   },
   text: {
     alignSelf: 'flex-start',
+    marginVertical: 5,
   },
   bold: {fontWeight: 'bold'},
   image: {
-    width: 300,
-    height: 300,
+    width: 250,
+    height: 250,
     marginVertical: 20,
   },
   buttonsContainer: {},
