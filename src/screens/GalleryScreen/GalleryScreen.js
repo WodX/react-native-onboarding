@@ -5,7 +5,10 @@ import {Gallery, NoImage} from '../../components';
 import styles from './GalleryScreen.styles';
 
 function GalleryScreen({navigation}) {
-  const images = useSelector(data => data.image.items);
+  const current_user = useSelector(data => data.user);
+  const images = useSelector(data =>
+    data.image.items.filter(image => image.user_id === current_user.id),
+  );
   return (
     <SafeAreaView style={styles.safeView}>
       {images.length > 0 ? (

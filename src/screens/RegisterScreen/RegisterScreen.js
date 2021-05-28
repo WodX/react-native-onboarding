@@ -61,7 +61,7 @@ function RegisterScreen({navigation}) {
           placeholder="Name"
           placeholderTextColor="#fff"
           style={styles.input}
-          onChangeText={text => setName(text)}
+          onChangeText={setName}
         />
 
         <TextInput
@@ -69,7 +69,7 @@ function RegisterScreen({navigation}) {
           placeholderTextColor="#fff"
           style={[styles.input, error && !email && styles.error]}
           keyboardType="email-address"
-          onChangeText={text => setEmail(text)}
+          onChangeText={setEmail}
         />
 
         <TextInput
@@ -77,7 +77,7 @@ function RegisterScreen({navigation}) {
           placeholderTextColor="#fff"
           style={[styles.input, error && !password && styles.error]}
           secureTextEntry
-          onChangeText={text => setPassword(text)}
+          onChangeText={setPassword}
         />
 
         <Pressable style={Button.normal} onPress={handleRegister}>

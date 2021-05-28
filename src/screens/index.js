@@ -4,6 +4,7 @@ import PhotoDetailsScreen from './PhotoDetailsScreen/PhotoDetailsScreen';
 import PhotoScreen from './PhotoScreen/PhotoScreen';
 import ProfileScreen from './ProfileScreen/ProfileScreen';
 import RegisterScreen from './RegisterScreen/RegisterScreen';
+import PhotoConfirm from './PhotoConfirm/PhotoConfirm';
 
 export {
   GalleryScreen,
@@ -12,4 +13,5 @@ export {
   PhotoScreen,
   ProfileScreen,
   RegisterScreen,
+  PhotoConfirm,
 };

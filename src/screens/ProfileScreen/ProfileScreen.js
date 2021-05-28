@@ -14,7 +14,6 @@ import {updateUser} from '../../store/slices/usersSlice';
 import Button from '../../styles/buttons';
 import styles from './ProfileScreen.styles';
 import {launchCamera} from 'react-native-image-picker';
-import {addImage} from '../../store/slices/imageSlice';
 import {ProfilePhoto, ModalForm} from '../../components';
 
 function ProfileScreen() {
@@ -33,7 +32,6 @@ function ProfileScreen() {
       if (response.didCancel) {
         return;
       }
-      dispatch(addImage(response));
       dispatch(updateUser({id: current_user.id, [type]: response.uri}));
     });
   };

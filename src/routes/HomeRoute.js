@@ -1,8 +1,9 @@
 import * as React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Image, StyleSheet, View} from 'react-native';
-import {PhotoScreen, ProfileScreen} from '../screens';
+import {ProfileScreen} from '../screens';
 import GalleryRoute from './GalleryRoute';
+import PhotoRoute from './PhotoRoute';
 
 const Tab = createBottomTabNavigator();
 
@@ -28,7 +29,8 @@ function HomeRoute() {
       />
       <Tab.Screen
         name="Photo"
-        component={PhotoScreen}
+        component={PhotoRoute}
+        tabBarOptions={{showLabel: false}}
         options={{
           tabBarIcon: () => (
             <View style={styles.photoContainer}>
