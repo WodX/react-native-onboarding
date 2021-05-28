@@ -120,6 +120,7 @@ function PhotoScreen({navigation, route: {params}}) {
               placeholderTextColor="#fff"
               returnKeyType="done"
               value={labels.join()}
+              autoCorrect={false}
               style={styles.labelsInput}
               onChangeText={handleLabels}
             />
