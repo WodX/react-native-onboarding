@@ -10,7 +10,7 @@ function PhotoRoute() {
       <Stack.Screen
         name="Photo"
         component={PhotoScreen}
-        options={{headerShown: false}}
+        options={{headerShown: false, unmountOnBlur: true}}
       />
       <Stack.Screen
         name="Confirm"

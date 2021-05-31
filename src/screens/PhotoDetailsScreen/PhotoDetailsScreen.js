@@ -76,7 +76,7 @@ function PhotoDetailsScreen({navigation, route: {params}}) {
             onPress={() => {
               navigation.navigate('Photo', {
                 screen: 'Confirm',
-                params: {id: image.uri},
+                params: {id: image.uri, backButton: true},
               });
             }}
             style={Button.normal}>
