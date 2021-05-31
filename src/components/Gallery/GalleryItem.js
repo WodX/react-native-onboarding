@@ -5,9 +5,9 @@ function GalleryItem({image, onPress}) {
   return (
     <TouchableOpacity
       style={styles.container}
-      key={image.uri}
+      key={image.uri || image.url}
       onPress={onPress}>
-      <Image style={styles.image} source={{uri: image.uri}} />
+      <Image style={styles.image} source={{uri: image.uri || image.url}} />
     </TouchableOpacity>
   );
 }

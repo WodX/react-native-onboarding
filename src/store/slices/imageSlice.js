@@ -1,9 +1,16 @@
-import {createSlice} from '@reduxjs/toolkit';
+import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
+import {get_memes} from '../../api/imgflip';
+
+export const fetchImages = createAsyncThunk('image/fetchFromApi', async () => {
+  const response = await get_memes();
+  return response.success ? response.data.memes : [];
+});
 
 export const imageSlice = createSlice({
   name: 'image',
   initialState: {
     items: [],
+    api: [],
   },
   reducers: {
     addImage: (state, action) => {
@@ -24,6 +31,11 @@ export const imageSlice = createSlice({
     },
     removeImage: (state, action) => {
       state.items = state.items.filter(image => image.uri !== action.payload);
+    },
+  },
+  extraReducers: {
+    [fetchImages.fulfilled]: (state, action) => {
+      state.api = action.payload;
     },
   },
 });

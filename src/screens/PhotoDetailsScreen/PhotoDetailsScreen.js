@@ -10,9 +10,14 @@ import useRefresh from '../../hooks/useRefresh';
 function PhotoDetailsScreen({navigation, route: {params}}) {
   useRefresh();
   const user = useSelector(data => data.user);
-  const [image_data] = useSelector(data =>
-    data.image.items.filter(image_inside => image_inside.uri === params),
-  );
+  const [image_data] = useSelector(data => {
+    if (params.url) {
+      return data.image.api.filter(
+        image_inside => image_inside.url === params.url,
+      );
+    }
+    return data.image.items.filter(image_inside => image_inside.uri === params);
+  });
   const image = image_data ? image_data : {};
   const dispatch = useDispatch();
 
@@ -28,13 +33,13 @@ function PhotoDetailsScreen({navigation, route: {params}}) {
   };
 
   const handleAddProfile = () => {
-    dispatch(updateUser({id: user.id, image: image.uri}));
+    dispatch(updateUser({id: user.id, image: image.uri || image.url}));
     navigation.navigate('Gallery');
     navigation.navigate('Profile');
   };
 
   const handleAddCover = () => {
-    dispatch(updateUser({id: user.id, cover: image.uri}));
+    dispatch(updateUser({id: user.id, cover: image.uri || image.url}));
     navigation.navigate('Gallery');
     navigation.navigate('Profile');
   };
@@ -42,10 +47,10 @@ function PhotoDetailsScreen({navigation, route: {params}}) {
   return (
     <ScrollView>
       <View style={styles.container}>
-        <Image style={styles.image} source={{uri: image.uri}} />
+        <Image style={styles.image} source={{uri: image.uri || image.url}} />
         <Text style={styles.text}>
           <Text style={styles.bold}>Name: </Text>
-          {image.fileName}
+          {image.fileName || image.name}
         </Text>
         <Text style={styles.text}>
           <Text style={styles.bold}>Description: </Text>
@@ -72,25 +77,29 @@ function PhotoDetailsScreen({navigation, route: {params}}) {
           {image.width} x {image.height}
         </Text>
         <View style={styles.buttonsContainer}>
-          <Pressable
-            onPress={() => {
-              navigation.navigate('Photo', {
-                screen: 'Confirm',
-                params: {id: image.uri, backButton: true},
-              });
-            }}
-            style={Button.normal}>
-            <Text style={Button.text}>Edit Image</Text>
-          </Pressable>
+          {!params.url && (
+            <Pressable
+              onPress={() => {
+                navigation.navigate('Photo', {
+                  screen: 'Confirm',
+                  params: {id: image.uri, backButton: true},
+                });
+              }}
+              style={Button.normal}>
+              <Text style={Button.text}>Edit Image</Text>
+            </Pressable>
+          )}
           <Pressable onPress={handleAddProfile} style={Button.normal}>
             <Text style={Button.text}>Add to Profile Photo</Text>
           </Pressable>
           <Pressable onPress={handleAddCover} style={Button.normal}>
             <Text style={Button.text}>Add to Cover Photo</Text>
           </Pressable>
-          <Pressable onPress={handleDelete} style={Button.close}>
-            <Text style={Button.text}>Delete</Text>
-          </Pressable>
+          {!params.url && (
+            <Pressable onPress={handleDelete} style={Button.close}>
+              <Text style={Button.text}>Delete</Text>
+            </Pressable>
+          )}
         </View>
       </View>
     </ScrollView>

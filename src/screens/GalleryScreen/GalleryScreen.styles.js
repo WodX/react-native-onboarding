@@ -34,4 +34,18 @@ export default StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
   },
+  explore: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    width: 65,
+    height: 65,
+    alignSelf: 'flex-end',
+    margin: 15,
+    borderRadius: 35,
+  },
+  image: {
+    width: 30,
+    height: 30,
+  },
 });

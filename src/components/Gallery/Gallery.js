@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
-import {View, ScrollView, Text, TouchableOpacity} from 'react-native';
+import React from 'react';
+import {View, ScrollView} from 'react-native';
 import GalleryItem from './GalleryItem';
 import styles from './Gallery.styles';
-import {Album, NoImage} from '../';
+import {NoImage} from '../';
 
 function Gallery({data, onPressItem}) {
   return (
@@ -13,7 +13,7 @@ function Gallery({data, onPressItem}) {
             {data.map(image => {
               return (
                 <GalleryItem
-                  key={image.uri}
+                  key={image.uri || image.id}
                   image={image}
                   onPress={() => {
                     onPressItem(image);

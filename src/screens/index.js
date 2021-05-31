@@ -5,6 +5,7 @@ import PhotoScreen from './PhotoScreen/PhotoScreen';
 import ProfileScreen from './ProfileScreen/ProfileScreen';
 import RegisterScreen from './RegisterScreen/RegisterScreen';
 import PhotoConfirm from './PhotoConfirm/PhotoConfirm';
+import Explore from './Explore/Explore';
 
 export {
   GalleryScreen,
@@ -14,4 +15,5 @@ export {
   ProfileScreen,
   RegisterScreen,
   PhotoConfirm,
+  Explore,
 };

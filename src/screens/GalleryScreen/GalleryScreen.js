@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {SafeAreaView, Text, TouchableOpacity, View} from 'react-native';
+import {Image, SafeAreaView, Text, TouchableOpacity, View} from 'react-native';
 import {useSelector} from 'react-redux';
 import {Album, Gallery} from '../../components';
 import styles from './GalleryScreen.styles';
@@ -39,6 +39,14 @@ function GalleryScreen({navigation}) {
       ) : (
         <Album userId={current_user.id} />
       )}
+      <TouchableOpacity
+        style={styles.explore}
+        onPress={() => navigation.navigate('Explore')}>
+        <Image
+          style={styles.image}
+          source={require('../../assets/search.png')}
+        />
+      </TouchableOpacity>
     </SafeAreaView>
   );
 }
