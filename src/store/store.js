@@ -16,6 +16,7 @@ import {
 import userSlice from './slices/userSlice';
 import imageSlice from './slices/imageSlice';
 import usersSlice from './slices/usersSlice';
+import albumSlice from './slices/albumSlice';
 
 const persistConfig = {
   key: 'root',
@@ -26,6 +27,7 @@ const reducers = combineReducers({
   user: userSlice,
   users: usersSlice,
   image: imageSlice,
+  album: albumSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);

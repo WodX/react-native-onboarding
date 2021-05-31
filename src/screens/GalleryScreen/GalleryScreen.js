@@ -1,17 +1,35 @@
-import * as React from 'react';
-import {SafeAreaView} from 'react-native';
+import React, {useState} from 'react';
+import {SafeAreaView, Text, TouchableOpacity, View} from 'react-native';
 import {useSelector} from 'react-redux';
-import {Gallery, NoImage} from '../../components';
+import {Album, Gallery} from '../../components';
 import styles from './GalleryScreen.styles';
 
 function GalleryScreen({navigation}) {
+  const [isPhotos, setPhotos] = useState(true);
   const current_user = useSelector(data => data.user);
   const images = useSelector(data =>
     data.image.items.filter(image => image.user_id === current_user.id),
   );
+
+  const handlePhotos = () => {
+    setPhotos(true);
+  };
+
+  const handleAlbums = () => {
+    setPhotos(false);
+  };
+
   return (
     <SafeAreaView style={styles.safeView}>
-      {images.length > 0 ? (
+      <View style={styles.options}>
+        <TouchableOpacity onPress={handlePhotos} style={styles.button}>
+          <Text style={styles.text}>Photos</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={handleAlbums} style={styles.button}>
+          <Text style={styles.text}>Albums</Text>
+        </TouchableOpacity>
+      </View>
+      {isPhotos ? (
         <Gallery
           data={images}
           onPressItem={image => {
@@ -19,7 +37,7 @@ function GalleryScreen({navigation}) {
           }}
         />
       ) : (
-        <NoImage />
+        <Album userId={current_user.id} />
       )}
     </SafeAreaView>
   );
