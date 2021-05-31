@@ -1,45 +1,51 @@
 import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
-  container: {
+  flex1: {
     flex: 1,
+  },
+  container: {
     flexDirection: 'row',
     padding: 15,
     flexWrap: 'wrap',
     alignItems: 'center',
   },
   buttonContainer: {
-    flex: 1,
-    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  centeredView: {
-    flex: 1,
+  itemContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 22,
   },
-  modalView: {
-    margin: 20,
-    backgroundColor: 'white',
-    borderRadius: 20,
-    padding: 35,
+  albumContainer: {
+    justifyContent: 'center',
     alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-  input: {
-    padding: 10,
-    backgroundColor: '#ced4da',
+    width: 100,
+    height: 100,
+    backgroundColor: '#ccc',
     borderRadius: 10,
-    width: 200,
+    margin: 10,
+  },
+  image: {
+    width: 50,
+    height: 50,
+  },
+  textName: {
+    width: 100,
+    textAlign: 'center',
+  },
+  sortContainer: {
+    flexDirection: 'row',
+    marginHorizontal: 25,
     marginVertical: 10,
+    width: 200,
+    justifyContent: 'space-between',
+  },
+  sortText: {
+    fontSize: 16,
+  },
+  activeSort: {
+    color: 'blue',
   },
 });

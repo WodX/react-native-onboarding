@@ -1,41 +1,29 @@
 import React, {useState} from 'react';
-import {View, Text, Pressable, Modal, TextInput} from 'react-native';
-import {useDispatch} from 'react-redux';
+import {
+  View,
+  Text,
+  Pressable,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+import {ModalAlbum} from '../';
 import {addAlbum} from '../../store/slices/albumSlice';
 import Button from '../../styles/buttons';
 import styles from './Album.styles';
 
-const MyModal = ({modalVisible, handleClose, handleCreate, ...props}) => {
-  const [name, setName] = useState();
-  console.log(name);
-
-  return (
-    <Modal {...props}>
-      <View style={styles.centeredView}>
-        <View style={styles.modalView}>
-          <TextInput
-            placeholder="Name"
-            placeholderTextColor="#fff"
-            style={styles.input}
-            onChangeText={setName}
-          />
-          <Pressable style={Button.normal} onPress={() => handleCreate({name})}>
-            <Text style={Button.text}>Add Album</Text>
-          </Pressable>
-          <Pressable style={Button.close} onPress={handleClose}>
-            <Text style={Button.text}>Close</Text>
-          </Pressable>
-        </View>
-      </View>
-    </Modal>
-  );
-};
-
-function Album({userId}) {
+function Album({userId, navigation}) {
   const dispatch = useDispatch();
+  const albums_data = useSelector(data =>
+    data.album.items.filter(album => album.user_id === userId),
+  );
+  const [albums, setAlbums] = useState(albums_data);
   const [modalVisible, setModalVisible] = useState(false);
+  const [dataSort, setDataSort] = useState(true);
+  const [arrow, setArrow] = useState(true);
 
-  const handleCreate = ({name = ''}) => {
+  const handleCreate = ({name}) => {
     setModalVisible(!modalVisible);
     dispatch(addAlbum({name: name, user_id: userId}));
   };
@@ -44,18 +32,80 @@ function Album({userId}) {
     setModalVisible(!modalVisible);
   };
 
+  const handleSort = type => {
+    return (a, b) => (a[type] > b[type] ? 1 : b[type] > a[type] ? -1 : 0);
+  };
+
+  useState(() => {
+    setAlbums(albums_data);
+  }, [albums_data]);
+
   return (
-    <View style={styles.container}>
-      <MyModal
-        animationType="fade"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          setModalVisible(!modalVisible);
-        }}
-        handleClose={handleClose}
-        handleCreate={handleCreate}
-      />
+    <>
+      <View>
+        <ModalAlbum
+          animationType="fade"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            setModalVisible(!modalVisible);
+          }}
+          handleClose={handleClose}
+          handleCreate={handleCreate}
+        />
+        <View style={styles.sortContainer}>
+          <Text style={[styles.sortText, {fontWeight: 'bold'}]}>Sort by:</Text>
+          <Pressable
+            onPress={() => {
+              setDataSort(true);
+              setAlbums(albums.sort(handleSort('id')));
+            }}>
+            <Text style={[styles.sortText, dataSort && styles.activeSort]}>
+              Date
+            </Text>
+          </Pressable>
+          <Pressable
+            onPress={() => {
+              setDataSort(false);
+              setAlbums(albums.sort(handleSort('name')));
+            }}>
+            <Text style={[styles.sortText, !dataSort && styles.activeSort]}>
+              Title
+            </Text>
+          </Pressable>
+          <Pressable
+            onPress={() => {
+              setAlbums(albums.reverse());
+              setArrow(!arrow);
+            }}>
+            <Text style={[styles.sortText]}>{arrow ? '⬆' : '⬇'}</Text>
+          </Pressable>
+        </View>
+        <ScrollView>
+          <View style={[styles.container]}>
+            {albums.map(item => {
+              return (
+                <TouchableOpacity
+                  style={styles.itemContainer}
+                  key={item.id}
+                  onPress={() =>
+                    navigation.navigate('ShowAlbum', {id: item.id})
+                  }>
+                  <View style={styles.albumContainer}>
+                    <Image
+                      style={styles.image}
+                      source={require('../../assets/album.png')}
+                    />
+                  </View>
+                  <Text numberOfLines={1} style={styles.textName}>
+                    {item.name}
+                  </Text>
+                </TouchableOpacity>
+              );
+            })}
+          </View>
+        </ScrollView>
+      </View>
       <View style={styles.buttonContainer}>
         <Pressable
           style={Button.normal}
@@ -63,7 +113,7 @@ function Album({userId}) {
           <Text style={Button.text}>Create New Album</Text>
         </Pressable>
       </View>
-    </View>
+    </>
   );
 }
 

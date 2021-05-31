@@ -25,6 +25,10 @@ function PhotoScreen({navigation, route: {params}}) {
     data.image.items.filter(img => img.uri === params.id),
   );
 
+  const albums = useSelector(data =>
+    data.album.items.filter(album_data => album_data.user_id === user_id),
+  );
+
   const [album, setAlbum] = useState(image.album || '');
   const [description, setDescription] = useState(image.description || '');
   const [labels, setLabels] = useState(image.labels || []);
@@ -135,7 +139,15 @@ function PhotoScreen({navigation, route: {params}}) {
                 itemStyle={styles.pickerItem}
                 selectedValue={album}
                 onValueChange={(itemValue, itemIndex) => setAlbum(itemValue)}>
-                <Picker.Item label="No albums" value="" color="#333" />
+                <Picker.Item label={'No Album'} value={''} color="#333" />
+                {albums.map(item => (
+                  <Picker.Item
+                    label={item.name}
+                    value={item.id}
+                    color="#333"
+                    key={item.id}
+                  />
+                ))}
               </Picker>
             </View>
             <View style={styles.album}>

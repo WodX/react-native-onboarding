@@ -23,10 +23,10 @@ function GalleryScreen({navigation}) {
     <SafeAreaView style={styles.safeView}>
       <View style={styles.options}>
         <TouchableOpacity onPress={handlePhotos} style={styles.button}>
-          <Text style={styles.text}>Photos</Text>
+          <Text style={[styles.text, !isPhotos && styles.active]}>Photos</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={handleAlbums} style={styles.button}>
-          <Text style={styles.text}>Albums</Text>
+          <Text style={[styles.text, isPhotos && styles.active]}>Albums</Text>
         </TouchableOpacity>
       </View>
       {isPhotos ? (
@@ -37,7 +37,7 @@ function GalleryScreen({navigation}) {
           }}
         />
       ) : (
-        <Album userId={current_user.id} />
+        <Album userId={current_user.id} navigation={navigation} />
       )}
       <TouchableOpacity
         style={styles.explore}

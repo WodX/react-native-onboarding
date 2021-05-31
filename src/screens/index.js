@@ -6,6 +6,7 @@ import ProfileScreen from './ProfileScreen/ProfileScreen';
 import RegisterScreen from './RegisterScreen/RegisterScreen';
 import PhotoConfirm from './PhotoConfirm/PhotoConfirm';
 import Explore from './Explore/Explore';
+import ShowAlbum from './ShowAlbum/ShowAlbum';
 
 export {
   GalleryScreen,
@@ -16,4 +17,5 @@ export {
   RegisterScreen,
   PhotoConfirm,
   Explore,
+  ShowAlbum,
 };

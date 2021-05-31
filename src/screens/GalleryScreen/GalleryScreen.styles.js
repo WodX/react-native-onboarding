@@ -35,12 +35,14 @@ export default StyleSheet.create({
     fontWeight: 'bold',
   },
   explore: {
+    position: 'absolute',
+    bottom: 5,
+    right: 5,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#fff',
     width: 65,
     height: 65,
-    alignSelf: 'flex-end',
     margin: 15,
     borderRadius: 35,
   },
@@ -48,4 +50,5 @@ export default StyleSheet.create({
     width: 30,
     height: 30,
   },
+  active: {color: '#ccc'},
 });

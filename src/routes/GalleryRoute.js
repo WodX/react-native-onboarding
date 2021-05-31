@@ -1,6 +1,11 @@
 import * as React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import {Explore, GalleryScreen, PhotoDetailsScreen} from '../screens';
+import {
+  Explore,
+  GalleryScreen,
+  PhotoDetailsScreen,
+  ShowAlbum,
+} from '../screens';
 
 const Stack = createStackNavigator();
 
@@ -14,6 +19,7 @@ function GalleryRoute() {
       />
       <Stack.Screen name="PhotoDetails" component={PhotoDetailsScreen} />
       <Stack.Screen name="Explore" component={Explore} />
+      <Stack.Screen name="ShowAlbum" component={ShowAlbum} />
     </Stack.Navigator>
   );
 }

@@ -7,7 +7,12 @@ export const albumSlice = createSlice({
   },
   reducers: {
     addAlbum: (state, action) => {
-      state.items.push(action.payload);
+      const album = {
+        id: Date.now(),
+        name: action.payload.name || 'Album' + Date.now(),
+        user_id: action.payload.user_id,
+      };
+      state.items.push(album);
     },
   },
 });

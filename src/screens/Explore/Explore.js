@@ -20,7 +20,6 @@ const Explore = ({navigation}) => {
       <Gallery
         data={images}
         onPressItem={image => {
-          console.log(image);
           navigation.navigate('PhotoDetails', {url: image.url});
         }}
       />
