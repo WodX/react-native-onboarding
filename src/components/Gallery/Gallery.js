@@ -13,6 +13,7 @@ const SORT_OPTIONS = {
 function Gallery({data, onPressItem, sort = true, filter = true}) {
   const [sortOrder, setSortOrder] = useState(true);
   const [sortBy, setSortBy] = useState('created_at');
+  const [isVisible, setIsVisible] = useState(false);
   const [label, setLabel] = useState();
   const [location, setLocation] = useState();
 
@@ -83,7 +84,13 @@ function Gallery({data, onPressItem, sort = true, filter = true}) {
           onPressOrder={() => setSortOrder(!sortOrder)}
         />
       )}
-      {filter && <FilterView options={filterOptions} />}
+      {filter && (
+        <FilterView
+          visible={isVisible}
+          onPress={() => setIsVisible(!isVisible)}
+          options={filterOptions}
+        />
+      )}
       <ScrollView>
         <View style={[styles.container]}>
           {order_data.map(image => {
