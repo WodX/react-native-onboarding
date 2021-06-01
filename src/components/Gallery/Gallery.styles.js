@@ -24,4 +24,11 @@ export default StyleSheet.create({
   activeSort: {
     color: 'blue',
   },
+  filterContainer: {
+    flexDirection: 'row',
+    marginHorizontal: 25,
+    marginVertical: 10,
+    width: 200,
+    justifyContent: 'space-between',
+  },
 });

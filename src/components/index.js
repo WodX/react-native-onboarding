@@ -5,5 +5,15 @@ import NoImage from './NoImage/NoImage';
 import Album from './Album/Album';
 import ModalAlbum from './ModalAlbum/ModalAlbum';
 import SortView from './SortView/SortView';
+import FilterView from './FilterView/FilterView';
 
-export {ProfilePhoto, Gallery, ModalForm, NoImage, Album, ModalAlbum, SortView};
+export {
+  ProfilePhoto,
+  Gallery,
+  ModalForm,
+  NoImage,
+  Album,
+  ModalAlbum,
+  SortView,
+  FilterView,
+};

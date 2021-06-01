@@ -23,6 +23,7 @@ const Explore = ({navigation}) => {
           navigation.navigate('PhotoDetails', {url: image.url});
         }}
         sort={false}
+        filter={false}
       />
     </SafeAreaView>
   );
