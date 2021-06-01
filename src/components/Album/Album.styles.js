@@ -35,17 +35,5 @@ export default StyleSheet.create({
     width: 100,
     textAlign: 'center',
   },
-  sortContainer: {
-    flexDirection: 'row',
-    marginHorizontal: 25,
-    marginVertical: 10,
-    width: 200,
-    justifyContent: 'space-between',
-  },
-  sortText: {
-    fontSize: 16,
-  },
-  activeSort: {
-    color: 'blue',
-  },
+  maxView: {maxHeight: 550},
 });

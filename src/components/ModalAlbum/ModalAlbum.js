@@ -20,7 +20,6 @@ const ModalAlbum = ({modalVisible, handleClose, handleCreate, ...props}) => {
             style={Button.normal}
             onPress={() => {
               handleCreate({name});
-              setName('');
             }}>
             <Text style={Button.text}>Add Album</Text>
           </Pressable>

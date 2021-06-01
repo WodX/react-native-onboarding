@@ -27,6 +27,10 @@ export const imageSlice = createSlice({
       state.items[image_index] = {
         ...state.items[image_index],
         ...action.payload,
+        created_at: state.items[image_index].created_at
+          ? state.items[image_index].created_at
+          : Date.now(),
+        updated_at: Date.now(),
       };
     },
     removeImage: (state, action) => {

@@ -1,21 +1,11 @@
 import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
-  flex1: {
-    flex: 1,
-  },
-  container: {
-    flex: 1,
-    flexDirection: 'row',
-    padding: 15,
-    flexWrap: 'wrap',
-    alignItems: 'center',
-  },
   sortContainer: {
     flexDirection: 'row',
     marginHorizontal: 25,
     marginVertical: 10,
-    width: 150,
+    width: 200,
     justifyContent: 'space-between',
   },
   sortText: {
@@ -23,5 +13,8 @@ export default StyleSheet.create({
   },
   activeSort: {
     color: 'blue',
+  },
+  bold: {
+    fontWeight: 'bold',
   },
 });

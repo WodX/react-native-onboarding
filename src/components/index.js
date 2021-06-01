@@ -4,5 +4,6 @@ import ModalForm from './ModalForm/ModalForm';
 import NoImage from './NoImage/NoImage';
 import Album from './Album/Album';
 import ModalAlbum from './ModalAlbum/ModalAlbum';
+import SortView from './SortView/SortView';
 
-export {ProfilePhoto, Gallery, ModalForm, NoImage, Album, ModalAlbum};
+export {ProfilePhoto, Gallery, ModalForm, NoImage, Album, ModalAlbum, SortView};

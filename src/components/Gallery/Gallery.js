@@ -1,16 +1,33 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, ScrollView} from 'react-native';
 import GalleryItem from './GalleryItem';
 import styles from './Gallery.styles';
-import {NoImage} from '../';
+import {NoImage, SortView} from '../';
+import {handleSort} from '../../helpers/sort';
+
+const SORT_OPTIONS = {
+  created_at: 'Date',
+};
 
 function Gallery({data, onPressItem}) {
+  const [sortOrder, setSortOrder] = useState(true);
+  const [sortBy, setSortBy] = useState('created_at');
+
+  const order_data = data.sort(handleSort(sortBy, sortOrder));
+
   return (
     <View style={styles.flex1}>
-      {data.length > 0 ? (
+      <SortView
+        sortOptions={SORT_OPTIONS}
+        sortOrder={sortOrder}
+        sortBy={sortBy}
+        onPressOptions={option => setSortBy(option)}
+        onPressOrder={() => setSortOrder(!sortOrder)}
+      />
+      {order_data.length > 0 ? (
         <ScrollView>
           <View style={[styles.container]}>
-            {data.map(image => {
+            {order_data.map(image => {
               return (
                 <GalleryItem
                   key={image.uri || image.id}
