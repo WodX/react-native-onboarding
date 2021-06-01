@@ -9,21 +9,23 @@ const SORT_OPTIONS = {
   created_at: 'Date',
 };
 
-function Gallery({data, onPressItem}) {
+function Gallery({data, onPressItem, sort = true}) {
   const [sortOrder, setSortOrder] = useState(true);
   const [sortBy, setSortBy] = useState('created_at');
 
-  const order_data = data.sort(handleSort(sortBy, sortOrder));
+  const order_data = sort ? data.sort(handleSort(sortBy, sortOrder)) : data;
 
   return (
     <View style={styles.flex1}>
-      <SortView
-        sortOptions={SORT_OPTIONS}
-        sortOrder={sortOrder}
-        sortBy={sortBy}
-        onPressOptions={option => setSortBy(option)}
-        onPressOrder={() => setSortOrder(!sortOrder)}
-      />
+      {sort && (
+        <SortView
+          sortOptions={SORT_OPTIONS}
+          sortOrder={sortOrder}
+          sortBy={sortBy}
+          onPressOptions={option => setSortBy(option)}
+          onPressOrder={() => setSortOrder(!sortOrder)}
+        />
+      )}
       {order_data.length > 0 ? (
         <ScrollView>
           <View style={[styles.container]}>

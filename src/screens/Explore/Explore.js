@@ -22,6 +22,7 @@ const Explore = ({navigation}) => {
         onPressItem={image => {
           navigation.navigate('PhotoDetails', {url: image.url});
         }}
+        sort={false}
       />
     </SafeAreaView>
   );
