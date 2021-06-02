@@ -17,6 +17,7 @@ import styles from './PhotoConfirm.styles';
 import Geolocation from '@react-native-community/geolocation';
 import {Picker} from '@react-native-picker/picker';
 import ButtonStyle from '../../styles/buttons';
+import {ModalView} from '../../components';
 
 function PhotoScreen({navigation, route: {params}}) {
   const dispatch = useDispatch();
@@ -36,6 +37,7 @@ function PhotoScreen({navigation, route: {params}}) {
     image.location || {status: '', info: {}},
   );
   const [isPrivate, setIsPrivate] = useState(image.isPrivate ? true : false);
+  const [visible, setVisible] = useState(false);
   const descriptionInput = useRef(null);
 
   const handleLocation = () => {
@@ -94,11 +96,18 @@ function PhotoScreen({navigation, route: {params}}) {
 
   return (
     <SafeAreaView style={styles.container}>
+      <ModalView
+        visible={visible}
+        uri={image.uri || image.url}
+        onSwipeDown={() => setVisible(false)}
+      />
       <ScrollView>
         <View style={styles.descriptionContainer}>
-          <View style={styles.imageContainer}>
-            <Image source={{uri: image.uri}} style={styles.image} />
-          </View>
+          <TouchableWithoutFeedback onPress={() => setVisible(true)}>
+            <View style={styles.imageContainer}>
+              <Image source={{uri: image.uri}} style={styles.image} />
+            </View>
+          </TouchableWithoutFeedback>
           <TextInput
             ref={descriptionInput}
             placeholder="Description..."

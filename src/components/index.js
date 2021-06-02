@@ -6,6 +6,7 @@ import Album from './Album/Album';
 import ModalAlbum from './ModalAlbum/ModalAlbum';
 import SortView from './SortView/SortView';
 import FilterView from './FilterView/FilterView';
+import ModalView from './ModalView/ModalView';
 
 export {
   ProfilePhoto,
@@ -16,4 +17,5 @@ export {
   ModalAlbum,
   SortView,
   FilterView,
+  ModalView,
 };

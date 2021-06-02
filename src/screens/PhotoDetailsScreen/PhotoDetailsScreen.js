@@ -1,15 +1,24 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {removeImage} from '../../store/slices/imageSlice';
 import {updateUser} from '../../store/slices/usersSlice';
-import {View, Text, Image, Pressable, ScrollView} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  Pressable,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 import Button from '../../styles/buttons';
 import styles from './PhotoDetailsScreen.styles';
 import useRefresh from '../../hooks/useRefresh';
 import useGuest from '../../hooks/useGuest';
+import {ModalView} from '../../components';
 
 function PhotoDetailsScreen({navigation, route: {params}}) {
   useRefresh();
+  const [visible, setVisible] = useState(false);
   const user = useSelector(data => data.user);
   const isGuest = useGuest();
   const [image_data] = useSelector(data => {
@@ -51,7 +60,14 @@ function PhotoDetailsScreen({navigation, route: {params}}) {
   return (
     <ScrollView>
       <View style={styles.container}>
-        <Image style={styles.image} source={{uri: image.uri || image.url}} />
+        <ModalView
+          visible={visible}
+          uri={image.uri || image.url}
+          onSwipeDown={() => setVisible(false)}
+        />
+        <TouchableOpacity onPress={() => setVisible(true)}>
+          <Image style={styles.image} source={{uri: image.uri || image.url}} />
+        </TouchableOpacity>
         <Text style={styles.text}>
           <Text style={styles.bold}>Name: </Text>
           {image.fileName || image.name}
