@@ -4,10 +4,12 @@ import {Image, StyleSheet, View} from 'react-native';
 import {ProfileScreen} from '../screens';
 import GalleryRoute from './GalleryRoute';
 import PhotoRoute from './PhotoRoute';
+import useGuest from '../hooks/useGuest';
 
 const Tab = createBottomTabNavigator();
 
 function HomeRoute() {
+  const isGuest = useGuest();
   return (
     <Tab.Navigator
       screenOptions={{
@@ -27,21 +29,23 @@ function HomeRoute() {
           ),
         }}
       />
-      <Tab.Screen
-        name="Photo"
-        component={PhotoRoute}
-        tabBarOptions={{showLabel: false}}
-        options={{
-          tabBarIcon: () => (
-            <View style={styles.photoContainer}>
-              <Image
-                source={require('../assets/photo.png')}
-                style={styles.photo}
-              />
-            </View>
-          ),
-        }}
-      />
+      {!isGuest && (
+        <Tab.Screen
+          name="Photo"
+          component={PhotoRoute}
+          tabBarOptions={{showLabel: false}}
+          options={{
+            tabBarIcon: () => (
+              <View style={styles.photoContainer}>
+                <Image
+                  source={require('../assets/photo.png')}
+                  style={styles.photo}
+                />
+              </View>
+            ),
+          }}
+        />
+      )}
       <Tab.Screen
         name="Profile"
         component={ProfileScreen}

@@ -15,9 +15,11 @@ import Button from '../../styles/buttons';
 import styles from './ProfileScreen.styles';
 import {launchCamera} from 'react-native-image-picker';
 import {ProfilePhoto, ModalForm} from '../../components';
+import useGuest from '../../hooks/useGuest';
 
 function ProfileScreen() {
   useRefresh();
+  const isGuest = useGuest();
   const current_user = useSelector(data => data.user);
   const dispatch = useDispatch();
   const [modalVisible, setModalVisible] = useState(false);
@@ -64,7 +66,7 @@ function ProfileScreen() {
 
       <View style={styles.header}>
         <TouchableOpacity
-          onPress={() => handleImage('cover')}
+          onPress={() => !isGuest && handleImage('cover')}
           style={styles.coverContainer}>
           <Image
             source={
@@ -78,18 +80,20 @@ function ProfileScreen() {
         <ProfilePhoto
           image={current_user.image}
           style={styles.imageContainer}
-          onPress={() => handleImage('image')}
+          onPress={() => !isGuest && handleImage('image')}
         />
       </View>
       <View style={styles.content}>
         <Text style={styles.name}>{current_user.name}</Text>
         <Text style={styles.email}>{current_user.email}</Text>
         <Text style={styles.description}>{current_user.description}</Text>
-        <Pressable
-          style={Button.normal}
-          onPress={() => setModalVisible(!modalVisible)}>
-          <Text style={Button.text}>Edit Profile</Text>
-        </Pressable>
+        {!isGuest && (
+          <Pressable
+            style={Button.normal}
+            onPress={() => setModalVisible(!modalVisible)}>
+            <Text style={Button.text}>Edit Profile</Text>
+          </Pressable>
+        )}
         <Pressable style={Button.close} onPress={handleLogout}>
           <Text style={Button.text}>Log out</Text>
         </Pressable>

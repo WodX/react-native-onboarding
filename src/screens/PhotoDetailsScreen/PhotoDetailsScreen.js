@@ -6,10 +6,12 @@ import {View, Text, Image, Pressable, ScrollView} from 'react-native';
 import Button from '../../styles/buttons';
 import styles from './PhotoDetailsScreen.styles';
 import useRefresh from '../../hooks/useRefresh';
+import useGuest from '../../hooks/useGuest';
 
 function PhotoDetailsScreen({navigation, route: {params}}) {
   useRefresh();
   const user = useSelector(data => data.user);
+  const isGuest = useGuest();
   const [image_data] = useSelector(data => {
     if (params.url) {
       return data.image.api.filter(
@@ -63,6 +65,10 @@ function PhotoDetailsScreen({navigation, route: {params}}) {
           {image.location && image.location.status}
         </Text>
         <Text style={styles.text}>
+          <Text style={styles.bold}>Created at: </Text>
+          {image.created_at && Date(image.created_at)}
+        </Text>
+        <Text style={styles.text}>
           <Text style={styles.bold}>Labels: </Text>
           {image.labels && image.labels.join(', ')}
         </Text>
@@ -78,31 +84,33 @@ function PhotoDetailsScreen({navigation, route: {params}}) {
           <Text style={styles.bold}>Dimensions: </Text>
           {image.width} x {image.height}
         </Text>
-        <View style={styles.buttonsContainer}>
-          {!params.url && (
-            <Pressable
-              onPress={() => {
-                navigation.navigate('Photo', {
-                  screen: 'Confirm',
-                  params: {id: image.uri, backButton: true},
-                });
-              }}
-              style={Button.normal}>
-              <Text style={Button.text}>Edit Image</Text>
+        {!isGuest && (
+          <View style={styles.buttonsContainer}>
+            {user.id === image.user_id && (
+              <Pressable
+                onPress={() => {
+                  navigation.navigate('Photo', {
+                    screen: 'Confirm',
+                    params: {id: image.uri, backButton: true},
+                  });
+                }}
+                style={Button.normal}>
+                <Text style={Button.text}>Edit Image</Text>
+              </Pressable>
+            )}
+            <Pressable onPress={handleAddProfile} style={Button.normal}>
+              <Text style={Button.text}>Add to Profile Photo</Text>
             </Pressable>
-          )}
-          <Pressable onPress={handleAddProfile} style={Button.normal}>
-            <Text style={Button.text}>Add to Profile Photo</Text>
-          </Pressable>
-          <Pressable onPress={handleAddCover} style={Button.normal}>
-            <Text style={Button.text}>Add to Cover Photo</Text>
-          </Pressable>
-          {!params.url && (
-            <Pressable onPress={handleDelete} style={Button.close}>
-              <Text style={Button.text}>Delete</Text>
+            <Pressable onPress={handleAddCover} style={Button.normal}>
+              <Text style={Button.text}>Add to Cover Photo</Text>
             </Pressable>
-          )}
-        </View>
+            {user.id === image.user_id && (
+              <Pressable onPress={handleDelete} style={Button.close}>
+                <Text style={Button.text}>Delete</Text>
+              </Pressable>
+            )}
+          </View>
+        )}
       </View>
     </ScrollView>
   );

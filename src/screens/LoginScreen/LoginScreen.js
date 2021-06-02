@@ -78,6 +78,22 @@ function LoginScreen({navigation}) {
             <Text style={styles.link}>Resgister.</Text>
           </TouchableOpacity>
         </View>
+        <View style={styles.textContainer}>
+          <Text>Login as a </Text>
+          <TouchableOpacity
+            onPress={() =>
+              dispatch(
+                loginUser({
+                  id: 'guest',
+                  email: 'guest@email.com',
+                  name: 'Guest',
+                  password: '123',
+                }),
+              )
+            }>
+            <Text style={styles.link}>Guest</Text>
+          </TouchableOpacity>
+        </View>
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
