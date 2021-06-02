@@ -17,7 +17,7 @@ import {launchCamera} from 'react-native-image-picker';
 import {ProfilePhoto, ModalForm, ModalView} from '../../components';
 import useGuest from '../../hooks/useGuest';
 
-function ProfileScreen({navigation}) {
+function ProfileScreen() {
   useRefresh();
   const isGuest = useGuest();
   const current_user = useSelector(data => data.user);
@@ -75,7 +75,7 @@ function ProfileScreen({navigation}) {
         <TouchableOpacity
           onPress={() => {
             setDisplay(current_user.cover);
-            setVisible(true);
+            !isGuest && setVisible(true);
           }}
           onLongPress={() => !isGuest && handleImage('cover')}
           style={styles.coverContainer}>
@@ -93,7 +93,7 @@ function ProfileScreen({navigation}) {
           style={styles.imageContainer}
           onPress={() => {
             setDisplay(current_user.image);
-            setVisible(true);
+            !isGuest && setVisible(true);
           }}
           onLongPress={() => !isGuest && handleImage('image')}
         />
