@@ -15,7 +15,7 @@ function PhotoRoute() {
       <Stack.Screen
         name="Confirm"
         component={PhotoConfirm}
-        options={{title: 'Photo'}}
+        options={{title: 'Photo', headerLeft: null}}
       />
     </Stack.Navigator>
   );

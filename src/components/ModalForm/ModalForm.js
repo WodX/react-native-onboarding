@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Text, View, Modal, Pressable, TextInput} from 'react-native';
-import { emailIsValid } from '../../helpers/helper';
+import {emailIsValid} from '../../helpers/helper';
 import Button from '../../styles/buttons';
 import styles from './ModalForm.styles';
 

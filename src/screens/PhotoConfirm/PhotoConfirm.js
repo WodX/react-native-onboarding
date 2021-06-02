@@ -44,11 +44,13 @@ function PhotoScreen({navigation, route: {params}}) {
         fetch(
           `https://geocode.xyz/${position.coords.latitude},${position.coords.longitude}?geoit=json`,
         ).then(response => {
-          response.json().then(location_data =>
-            setLocation({
-              status: `${location_data.city}, ${location_data.country}`,
-              info: location_data,
-            }),
+          response.json().then(
+            location_data =>
+              location_data.city &&
+              setLocation({
+                status: `${location_data.city}, ${location_data.country}`,
+                info: location_data,
+              }),
           );
         });
       },
