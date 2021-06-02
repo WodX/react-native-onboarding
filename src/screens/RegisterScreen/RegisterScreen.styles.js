@@ -20,6 +20,9 @@ export default StyleSheet.create({
     borderWidth: 2,
     borderColor: '#f08080',
   },
+  errorMessage: {
+    color: '#f08080',
+  },
   image: {
     alignSelf: 'center',
     margin: 20,

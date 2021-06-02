@@ -24,6 +24,10 @@ export const handleSort = (type, order) => {
   };
 };
 
+export const emailIsValid = email => {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+};
+
 export const getUnique = array => {
   return array.filter((elem, index) => {
     if (elem !== '') {

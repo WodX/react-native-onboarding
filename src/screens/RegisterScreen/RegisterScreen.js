@@ -14,6 +14,7 @@ import {createUser} from '../../store/slices/usersSlice';
 import {launchCamera} from 'react-native-image-picker';
 import Button from '../../styles/buttons';
 import styles from './RegisterScreen.styles';
+import {emailIsValid} from '../../helpers/helper';
 
 function RegisterScreen({navigation}) {
   const dispatch = useDispatch();
@@ -21,16 +22,20 @@ function RegisterScreen({navigation}) {
   const [name, setName] = useState('');
   const [image, setImage] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(false);
+  const [error, setError] = useState();
 
   const handleRegister = () => {
     if (!email || !password) {
-      setError(true);
+      setError('Email and Password are required.');
+      return;
+    }
+    if (!emailIsValid(email)) {
+      setError('Email is not valid.');
       return;
     }
     dispatch(
       createUser({
-        email,
+        email: email.toLowerCase(),
         name,
         image,
         password,
@@ -67,8 +72,10 @@ function RegisterScreen({navigation}) {
         <TextInput
           placeholder="Email"
           placeholderTextColor="#fff"
+          value={email.toLowerCase()}
           style={[styles.input, error && !email && styles.error]}
           keyboardType="email-address"
+          autoCapitalize="none"
           onChangeText={setEmail}
         />
 
@@ -79,7 +86,7 @@ function RegisterScreen({navigation}) {
           secureTextEntry
           onChangeText={setPassword}
         />
-
+        <Text style={styles.errorMessage}>{error}</Text>
         <Pressable style={Button.normal} onPress={handleRegister}>
           <Text style={Button.text}>Register</Text>
         </Pressable>

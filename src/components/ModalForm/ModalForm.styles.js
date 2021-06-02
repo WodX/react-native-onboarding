@@ -32,4 +32,10 @@ export default StyleSheet.create({
     width: 300,
     marginVertical: 10,
   },
+  error: {
+    opacity: 0.1,
+  },
+  errorMessage: {
+    color: '#f08080',
+  },
 });
