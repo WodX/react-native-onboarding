@@ -6,9 +6,17 @@ import {FilterView, NoImage, SortView} from '../';
 import {
   handleSort,
   getUniqueLabels,
-  filterByLabels,
+  filterByLabel,
   getUniqueLocations,
   filterByLocation,
+  getUniqueMonths,
+  filterByMonth,
+  getUniqueYears,
+  filterByYear,
+  getUniqueDays,
+  filterByDay,
+  getUniqueHours,
+  filterByHour,
 } from '../../helpers/helper';
 
 const SORT_OPTIONS = {
@@ -21,6 +29,10 @@ function Gallery({data, onPressItem, sort = true, filter = true}) {
   const [isVisible, setIsVisible] = useState(false);
   const [label, setLabel] = useState();
   const [location, setLocation] = useState();
+  const [year, setYear] = useState();
+  const [month, setMonth] = useState();
+  const [day, setDay] = useState();
+  const [hour, setHour] = useState();
 
   if (data.length <= 0) {
     return <NoImage />;
@@ -28,13 +40,21 @@ function Gallery({data, onPressItem, sort = true, filter = true}) {
 
   const labels = getUniqueLabels(data);
   const locations = getUniqueLocations(data);
+  const years = getUniqueYears(data);
+  const months = getUniqueMonths(data);
+  const days = getUniqueDays(data);
+  const hours = getUniqueHours(data);
 
-  const filteredLabels = filterByLabels(data, label);
+  const filteredLabels = filterByLabel(data, label);
   const filteredLocation = filterByLocation(filteredLabels, location);
+  const filteredYears = filterByYear(filteredLocation, year);
+  const filteredMonth = filterByMonth(filteredYears, month);
+  const filteredDay = filterByDay(filteredMonth, day);
+  const filteredHour = filterByHour(filteredDay, hour);
 
   const order_data = sort
-    ? filteredLocation.sort(handleSort(sortBy, sortOrder))
-    : filteredLocation;
+    ? filteredHour.sort(handleSort(sortBy, sortOrder))
+    : filteredHour;
 
   const filterOptions = {
     Labels: {
@@ -46,6 +66,26 @@ function Gallery({data, onPressItem, sort = true, filter = true}) {
       data: locations,
       onValueChange: itemValue => setLocation(itemValue),
       selectedValue: location,
+    },
+    Year: {
+      data: years,
+      onValueChange: itemValue => setYear(itemValue),
+      selectedValue: year,
+    },
+    Month: {
+      data: months,
+      onValueChange: itemValue => setMonth(itemValue),
+      selectedValue: month,
+    },
+    Day: {
+      data: days,
+      onValueChange: itemValue => setDay(itemValue),
+      selectedValue: day,
+    },
+    Hour: {
+      data: hours,
+      onValueChange: itemValue => setHour(itemValue),
+      selectedValue: hour,
     },
   };
 
