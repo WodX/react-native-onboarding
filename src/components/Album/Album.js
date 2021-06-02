@@ -12,7 +12,7 @@ import {ModalAlbum, SortView} from '../';
 import {addAlbum} from '../../store/slices/albumSlice';
 import Button from '../../styles/buttons';
 import styles from './Album.styles';
-import {handleSort} from '../../helpers/sort';
+import {handleSort} from '../../helpers/helper';
 
 const SORT_OPTIONS = {
   id: 'Date',

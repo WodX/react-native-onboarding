@@ -1,10 +1,15 @@
 import React, {useState} from 'react';
-import {View, ScrollView, Text} from 'react-native';
+import {View, ScrollView} from 'react-native';
 import GalleryItem from './GalleryItem';
 import styles from './Gallery.styles';
 import {FilterView, NoImage, SortView} from '../';
-import {handleSort} from '../../helpers/sort';
-import {useSelector} from 'react-redux';
+import {
+  handleSort,
+  getUniqueLabels,
+  filterByLabels,
+  getUniqueLocations,
+  filterByLocation,
+} from '../../helpers/helper';
 
 const SORT_OPTIONS = {
   created_at: 'Date',
@@ -17,40 +22,19 @@ function Gallery({data, onPressItem, sort = true, filter = true}) {
   const [label, setLabel] = useState();
   const [location, setLocation] = useState();
 
-  const getUnique = array => {
-    return array.filter((elem, index) => {
-      if (elem !== '') {
-        return array.indexOf(elem) === index;
-      }
-    });
-  };
+  if (data.length <= 0) {
+    return <NoImage />;
+  }
 
-  const all_labels = data.map(image => {
-    return image.labels.map(label_data => label_data);
-  });
+  const labels = getUniqueLabels(data);
+  const locations = getUniqueLocations(data);
 
-  const labels = getUnique(all_labels.join().split(','));
+  const filteredLabels = filterByLabels(data, label);
+  const filteredLocation = filterByLocation(filteredLabels, location);
 
-  const filterByLabels = data.filter(arr => {
-    let ok = !label ? true : false;
-    arr.labels.forEach(element => {
-      if (element === label) {
-        ok = true;
-      }
-    });
-    if (ok) {
-      return arr;
-    }
-  });
-
-  const locations = getUnique(data.map(image => image.location.status));
-
-  const filterByLocation = filterByLabels.filter(loc => {
-    if (location) {
-      return loc.location.status === location;
-    }
-    return loc;
-  });
+  const order_data = sort
+    ? filteredLocation.sort(handleSort(sortBy, sortOrder))
+    : filteredLocation;
 
   const filterOptions = {
     Labels: {
@@ -64,14 +48,6 @@ function Gallery({data, onPressItem, sort = true, filter = true}) {
       selectedValue: location,
     },
   };
-
-  const order_data = sort
-    ? filterByLocation.sort(handleSort(sortBy, sortOrder))
-    : filterByLocation;
-
-  if (data.length <= 0) {
-    return <NoImage />;
-  }
 
   return (
     <View style={styles.flex1}>
