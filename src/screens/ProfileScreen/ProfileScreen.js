@@ -14,15 +14,17 @@ import {updateUser} from '../../store/slices/usersSlice';
 import Button from '../../styles/buttons';
 import styles from './ProfileScreen.styles';
 import {launchCamera} from 'react-native-image-picker';
-import {ProfilePhoto, ModalForm} from '../../components';
+import {ProfilePhoto, ModalForm, ModalView} from '../../components';
 import useGuest from '../../hooks/useGuest';
 
-function ProfileScreen() {
+function ProfileScreen({navigation}) {
   useRefresh();
   const isGuest = useGuest();
   const current_user = useSelector(data => data.user);
   const dispatch = useDispatch();
   const [modalVisible, setModalVisible] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [display, setDisplay] = useState('');
 
   const handleSave = ({name, email, description}) => {
     setModalVisible(!modalVisible);
@@ -52,6 +54,11 @@ function ProfileScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
+      <ModalView
+        visible={visible}
+        uri={display}
+        onSwipeDown={() => setVisible(false)}
+      />
       <ModalForm
         animationType="slide"
         transparent={true}
@@ -66,7 +73,11 @@ function ProfileScreen() {
 
       <View style={styles.header}>
         <TouchableOpacity
-          onPress={() => !isGuest && handleImage('cover')}
+          onPress={() => {
+            setDisplay(current_user.cover);
+            setVisible(true);
+          }}
+          onLongPress={() => !isGuest && handleImage('cover')}
           style={styles.coverContainer}>
           <Image
             source={
@@ -80,7 +91,11 @@ function ProfileScreen() {
         <ProfilePhoto
           image={current_user.image}
           style={styles.imageContainer}
-          onPress={() => !isGuest && handleImage('image')}
+          onPress={() => {
+            setDisplay(current_user.image);
+            setVisible(true);
+          }}
+          onLongPress={() => !isGuest && handleImage('image')}
         />
       </View>
       <View style={styles.content}>
