@@ -16,7 +16,9 @@ function PhotoDetailsScreen({navigation, route: {params}}) {
         image_inside => image_inside.url === params.url,
       );
     }
-    return data.image.items.filter(image_inside => image_inside.uri === params);
+    return data.image.items.filter(
+      image_inside => image_inside.uri === params.uri,
+    );
   });
   const image = image_data ? image_data : {};
   const dispatch = useDispatch();
