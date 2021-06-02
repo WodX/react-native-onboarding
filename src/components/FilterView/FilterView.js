@@ -6,8 +6,9 @@ import {Picker} from '@react-native-picker/picker';
 const FilterView = ({options = {}, visible, onPress}) => {
   return (
     <View style={styles.container}>
-      <Pressable onPress={onPress}>
-        <Text style={[styles.text, styles.bold]}>Show Filters</Text>
+      <Pressable onPress={onPress} style={styles.show}>
+        <Text style={[styles.text, styles.bold]}>Filters: </Text>
+        <Text style={[styles.link]}>{visible ? 'Hide' : 'Show'}</Text>
       </Pressable>
       {visible &&
         Object.entries(options).map(obj => (

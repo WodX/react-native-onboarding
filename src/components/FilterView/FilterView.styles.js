@@ -19,4 +19,6 @@ export default StyleSheet.create({
     flexDirection: 'row',
   },
   label: {height: 50, padding: 15, alignSelf: 'center'},
+  link: {color: 'blue'},
+  show: {flexDirection: 'row', alignItems: 'center'},
 });
